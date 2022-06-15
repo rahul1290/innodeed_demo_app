@@ -2,9 +2,9 @@ const express = require("express");
 var router = express.Router();
 const User = require("../models/Users");
 
-var redis = require("redis");
-const redisClient = redis.createClient();
-redisClient.connect();
+// var redis = require("redis");
+// const redisClient = redis.createClient();
+// redisClient.connect();
 var faker = require("faker");
 
 router.post("/fake", async (req, res) => {
@@ -27,21 +27,20 @@ router.post("/fake", async (req, res) => {
 
 //Get all users
 router.get("/", async (req, res) => {
-  console.time("getAllUser");
   try {
-    let keyName = "allUser";
-    let getCacheData = await redisClient.get(keyName);
-    if (getCacheData) {
-      console.log("get cache");
-      console.timeEnd("getAllUser");
-      res.json(JSON.parse(getCacheData));
-    } else {
-      console.log("set cache");
-      const allUsers = await User.find();
-      console.timeEnd("getAllUser");
-      redisClient.set(keyName, JSON.stringify(allUsers));
-      res.json(allUsers);
-    }
+    // let keyName = "allUser";
+    // let getCacheData = await redisClient.get(keyName);
+    // if (getCacheData) {
+    //   console.log("get cache");
+    //   console.timeEnd("getAllUser");
+    //   res.json(JSON.parse(getCacheData));
+    // } else {
+    //   console.log("set cache");
+    const allUsers = await User.find();
+    // console.timeEnd("getAllUser");
+    // redisClient.set(keyName, JSON.stringify(allUsers));
+    res.json(allUsers);
+    // }
   } catch (err) {
     res.json({
       message: err,

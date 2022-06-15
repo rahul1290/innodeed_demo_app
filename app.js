@@ -5,16 +5,16 @@ const port = process.env.port || 8000;
 const bodyParser = require("body-parser");
 var cors = require("cors");
 require("dotenv/config");
-var redis = require("redis");
+//var redis = require("redis");
 const userRoute = require("./routes/users");
 
-const redisClient = redis.createClient();
-redisClient.connect();
+// const redisClient = redis.createClient();
+// redisClient.connect();
 
-redisClient.on("error", (err) => console.log("Redis Clinet error", err));
-redisClient.on("connect", () => {
-  console.log("RedisClient connected.");
-});
+// redisClient.on("error", (err) => console.log("Redis Clinet error", err));
+// redisClient.on("connect", () => {
+//   console.log("RedisClient connected.");
+// });
 
 app.use(cors());
 app.use(bodyParser.json());
